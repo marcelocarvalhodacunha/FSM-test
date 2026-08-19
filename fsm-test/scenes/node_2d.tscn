@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://niwuaylnhfvy"]
+
+[ext_resource type="Texture2D" uid="uid://co5lw4bqwst2l" path="res://sprites/icon.svg" id="1_04qyp"]
+[ext_resource type="Script" uid="uid://dorn1vlloi4uw" path="res://scripts/state_machine.gd" id="2_j7wrs"]
+[ext_resource type="Script" uid="uid://dsdn8cdvrg8lt" path="res://scripts/idle_state.gd" id="3_fws66"]
+[ext_resource type="Script" uid="uid://by3xavqs4qw4d" path="res://scripts/jump_state.gd" id="4_hh0fu"]
+[ext_resource type="Script" uid="uid://dli1vbykbmvof" path="res://scripts/walk_state.gd" id="5_3m5ht"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebum8"]
+size = Vector2(128, 126)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ebum8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvf33"]
+size = Vector2(1149, 124)
+
+[node name="Node2D" type="Node2D" unique_id=687009368]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=678399702]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1775214111]
+position = Vector2(591, 445)
+texture = ExtResource("1_04qyp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=928182764]
+position = Vector2(591, 445)
+shape = SubResource("RectangleShape2D_ebum8")
+
+[node name="StateMachine" type="Node" parent="CharacterBody2D" unique_id=1156275014 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_j7wrs")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://dorn1vlloi4uw"
+
+[node name="IdleState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=2053745387]
+script = ExtResource("3_fws66")
+metadata/_custom_type_script = "uid://dsdn8cdvrg8lt"
+
+[node name="JumpState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=213235539]
+script = ExtResource("4_hh0fu")
+metadata/_custom_type_script = "uid://by3xavqs4qw4d"
+
+[node name="WalkState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=1339329751]
+script = ExtResource("5_3m5ht")
+metadata/_custom_type_script = "uid://dli1vbykbmvof"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=696764017]
+physics_material_override = SubResource("PhysicsMaterial_ebum8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=721440226]
+position = Vector2(576.5, 586)
+shape = SubResource("RectangleShape2D_xvf33")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=540771986]
+position = Vector2(579, 586)
+scale = Vector2(8.953125, 1)
+texture = ExtResource("1_04qyp")
